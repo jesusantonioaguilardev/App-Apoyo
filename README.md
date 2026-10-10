@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AppApoyo
 
-## Getting Started
+Acompañamiento emocional con IA (texto y voz) con avatar hombre, mujer o gato. Web primero (Next.js + Supabase).
 
-First, run the development server:
+## Arranque local
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. `npm install`
+2. Copia `.env.example` a `.env.local` y completa las llaves de Supabase.
+3. En Supabase: SQL Editor → ejecuta `supabase/migrations/0001_esquema_inicial.sql`
+   (o `supabase db push` con la CLI). Activa el proveedor Google en Authentication si se usará.
+4. `npm run dev` → http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run dev` / `npm run build` / `npm run lint`
+- `npm test` — pruebas de planes, cuotas de voz y detección de riesgo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura
 
-## Learn More
+- `lib/billing/plans.ts` — fuente única de los 4 planes (Esencial, Conecta, Cerca, Integral)
+- `lib/billing/quota.ts` — cuota de voz: avisos 80%/95%, sin acumulación entre periodos
+- `lib/safety/crisis.ts` — líneas de ayuda en México y detección básica de riesgo
+- `lib/supabase/` y `proxy.ts` — sesión y protección de rutas privadas
+- `supabase/migrations/` — esquema con Row Level Security
 
-To learn more about Next.js, take a look at the following resources:
+## Estado
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Fase 0 (base) lista. Siguiente: Fase 1 — onboarding, chat con IA, memoria y bienestar.
+Las páginas de privacidad y términos son borradores pendientes de revisión legal.
